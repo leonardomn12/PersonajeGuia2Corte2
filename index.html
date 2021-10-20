@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prácticas</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"></script>
+    <script>
+        
+        var camera;
+        var scene;
+        var renderer;
+        var oreja1;
+        var oreja2;
+        var cabeza;
+        var cuerpo;
+        var cuerpo2;
+        var ceja1;
+        var ceja2;
+        var ojo1;
+        var ojo2;
+        var nariz;
+        var boca;
+        var bola1;
+        var bola2;
+        var brazo1;
+        var brazo2;
+        var antena1;
+        var antena2;
+        var mano1;
+        var mano2;
+        var DI1;
+        var DI2;
+        var DI3;
+        var DI4;
+        var DD1;
+        var DD2;
+        var DD3;
+        var DD4;
+        var pierna1;
+        var pierna2;
+        var pie1;
+        var pie2;
+        
+
+        function init(){
+        camera = new THREE.PerspectiveCamera(75,500/350,1,100);
+        camera.position.z = 3;
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+
+        geometriaCabeza = new THREE.SphereGeometry(0.5, 32, 16);
+        materialCabeza = new THREE.MeshPhongMaterial({color: 0xF4DB00});
+        cabeza = new THREE.Mesh(geometriaCabeza,materialCabeza);
+        
+        geometriaCuerpo = new THREE.SphereGeometry(0.3, 32, 16);
+        materialCuerpo = new THREE.MeshPhongMaterial({color: 0xF4DB00});
+        cuerpo = new THREE.Mesh(geometriaCuerpo,materialCuerpo);
+
+        geometriaCuerpo2 = new THREE.SphereGeometry(0.275, 0, 32, 16, Math.PI);
+        materialCuerpo2 = new THREE.MeshPhongMaterial({color: 0xE2A40B});
+        cuerpo2 = new THREE.Mesh(geometriaCuerpo2,materialCuerpo2);
+
+        geometriaOreja1 = new THREE.SphereGeometry(0.15,32,16);
+        materialOreja1 = new THREE.MeshPhongMaterial({color : "red"});
+        oreja1 = new THREE.Mesh(geometriaOreja1, materialOreja1);   
+
+        geometriaOreja2 = new THREE.SphereGeometry(0.15,32,16);
+        materialOreja2 = new THREE.MeshPhongMaterial({color : "red"});
+        oreja2 = new THREE.Mesh(geometriaOreja2, materialOreja2);
+        
+        geometriaCeja1 = new THREE.TorusGeometry(0.05, 0.005, 32, 32, Math.PI);
+        materialCeja1 = new THREE.MeshPhongMaterial( { color: 0x4E4416 } );
+        ceja1 = new THREE.Mesh(geometriaCeja1, materialCeja1);
+
+        geometriaCeja2 = new THREE.TorusGeometry(0.05, 0.005, 32, 32, Math.PI);
+        materialCeja2 = new THREE.MeshPhongMaterial( { color: 0x4E4416 } );
+        ceja2 = new THREE.Mesh(geometriaCeja2, materialCeja2);
+
+        geometriaOjo1 = new THREE.SphereGeometry(0.08,32,16);
+        materialOjo1 = new THREE.MeshPhongMaterial({color : "black"});
+        ojo1 = new THREE.Mesh(geometriaOjo1, materialOjo1);
+
+        geometriaOjo2 = new THREE.SphereGeometry(0.08,32,16);
+        materialOjo2 = new THREE.MeshPhongMaterial({color : "black"});
+        ojo2 = new THREE.Mesh(geometriaOjo1, materialOjo1);
+
+        geometriaNariz = new THREE.SphereGeometry(0.05,32,16);
+        materialNariz = new THREE.MeshPhongMaterial({color : 0x4E4416});
+        nariz = new THREE.Mesh(geometriaNariz, materialNariz);
+
+        geometriaBoca = new THREE.TorusGeometry(0.05, 0.005, 32, 32, Math.PI);
+        materialBoca = new THREE.MeshPhongMaterial( { color: 0x4E4416 } );
+        boca = new THREE.Mesh(geometriaBoca, materialBoca);
+
+        geometriaBola1 = new THREE.SphereGeometry(0.07, 32, 16);
+        materialBola1 = new THREE.MeshPhongMaterial({color: 0xF4DB00});
+        bola1 = new THREE.Mesh(geometriaBola1,materialBola1);
+
+        geometriaBola2 = new THREE.SphereGeometry(0.07, 32, 16);
+        materialBola2 = new THREE.MeshPhongMaterial({color: 0xF4DB00});
+        bola2 = new THREE.Mesh(geometriaBola2,materialBola2);
+
+        geometriaBrazo1 = new THREE.TorusGeometry(0.3, 0.03, 32, 32, Math.PI);
+        materialBrazo1 = new THREE.MeshPhongMaterial( { color: "grey" } );
+        brazo1 = new THREE.Mesh(geometriaBrazo1, materialBrazo1);
+
+        geometriaBrazo2 = new THREE.TorusGeometry(0.3, 0.02, 32, 32, Math.PI);
+        materialBrazo2 = new THREE.MeshPhongMaterial( { color: "grey" } );
+        brazo2 = new THREE.Mesh(geometriaBrazo2, materialBrazo2);
+
+        geometriaAntena1 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialAntena1 = new THREE.MeshPhongMaterial( { color: "grey" } );
+        antena1 = new THREE.Mesh(geometriaAntena1, materialAntena1);
+
+        geometriaAntena2 = new THREE.SphereGeometry(0.1,32,16);
+        materialAntena2 = new THREE.MeshPhongMaterial({color : "blue"});
+        antena2 = new THREE.Mesh(geometriaAntena2, materialAntena2);
+        
+        geometriaMano1 = new THREE.SphereGeometry(0.12, 32, 16);
+        materialMano1 = new THREE.MeshPhongMaterial({color: 0xF4DB00});
+        mano1 = new THREE.Mesh(geometriaMano1,materialMano1);
+
+        geometriaMano2 = new THREE.SphereGeometry(0.12, 32, 16);
+        materialMano2 = new THREE.MeshPhongMaterial({color: 0xF4DB00});
+        mano2 = new THREE.Mesh(geometriaMano2,materialMano2);
+
+        geometriaDI1 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDI1 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DI1 = new THREE.Mesh(geometriaDI1, materialDI1);
+
+        geometriaDI2 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDI2 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DI2 = new THREE.Mesh(geometriaDI2, materialDI2);
+
+        geometriaDI3 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDI3 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DI3 = new THREE.Mesh(geometriaDI3, materialDI3);
+
+        geometriaDI4 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDI4 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DI4 = new THREE.Mesh(geometriaDI4, materialDI4);
+
+        geometriaDD1 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDD1 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DD1 = new THREE.Mesh(geometriaDD1, materialDD1);
+
+        geometriaDD2 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDD2 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DD2 = new THREE.Mesh(geometriaDD2, materialDD2);
+
+        geometriaDD3 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDD3 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DD3 = new THREE.Mesh(geometriaDD3, materialDD3);
+
+        geometriaDD4 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialDD4 = new THREE.MeshPhongMaterial( { color: 0xF4DB00 } );
+        DD4 = new THREE.Mesh(geometriaDD4, materialDD4);
+
+        geometriaPierna1 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialPierna1 = new THREE.MeshPhongMaterial( { color: "grey" } );
+        pierna1 = new THREE.Mesh(geometriaPierna1, materialPierna1);
+
+        geometriaPierna2 = new THREE.CylinderGeometry(0.07, 0.07);
+        materialPierna2 = new THREE.MeshPhongMaterial( { color: "grey" } );
+        pierna2 = new THREE.Mesh(geometriaPierna2, materialPierna2);
+        
+        geometriaPie1 = new THREE.SphereGeometry(0.1, 32, 16);
+        materialPie1 = new THREE.MeshPhongMaterial({color: 0x4E4416});
+        pie1 = new THREE.Mesh(geometriaPie1,materialPie1);
+
+        geometriaPie2 = new THREE.SphereGeometry(0.1, 32, 16);
+        materialPie2 = new THREE.MeshPhongMaterial({color: 0x4E4416});
+        pie2 = new THREE.Mesh(geometriaPie2,materialPie2);
+
+        scene.add(cabeza);
+        scene.add(cuerpo);
+        scene.add(cuerpo2);
+        scene.add(oreja1);
+        scene.add(oreja2);
+        scene.add(ceja1);
+        scene.add(ceja2);
+        scene.add(ojo1);
+        scene.add(ojo2);
+        scene.add(nariz);
+        scene.add(boca);
+        scene.add(brazo1);
+        scene.add(brazo2);
+        scene.add(bola1);
+        scene.add(bola2);
+        scene.add(antena1);
+        scene.add(antena2);
+        scene.add(mano1);
+        scene.add(mano2);
+        scene.add(DI1);
+        scene.add(DI2);
+        scene.add(DI3);
+        scene.add(DI4);
+        scene.add(DD1);
+        scene.add(DD2);
+        scene.add(DD3);
+        scene.add(DD4);
+        scene.add(pierna1);
+        scene.add(pierna2);
+        scene.add(pie1);
+        scene.add(pie2);
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        }
+
+        function animate(time){
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+            cabeza.position.x = -0.8;
+            cabeza.position.y = 0.2;
+            cuerpo.position.x = -0.35;
+            cuerpo.position.y = -0.42;
+            cuerpo2.position.x = -0.33;
+            cuerpo2.position.y = -0.43;
+            cuerpo2.position.z = 0.1;
+            cuerpo2.rotation.x = -3;
+            cuerpo2.rotation.y = -0.7;
+            cuerpo2.rotation.z = -0.5;
+            oreja1.position.y = 0.4;
+            oreja1.position.x = -0.38;
+            oreja1.position.z = -0.4;
+            oreja2.position.x = -1.2;
+            oreja2.position.z = 0.2;
+            oreja2.position.y = 0.08;
+            ceja1.position.x = -0.8;
+            ceja1.position.z = 0.9;
+            ceja1.position.y = 0.25;
+            ojo1.position.x = -0.95;
+            ojo1.position.z = 0.45;
+            ojo1.position.y = 0.13;
+            ceja2.position.x = -0.33;
+            ceja2.position.z = 0.9;
+            ceja2.position.y = 0.3;
+            ojo2.position.y = 0.25;
+            ojo2.position.x = -0.4;
+            ojo2.position.z = 0.3;
+            nariz.position.x = -0.68;
+            nariz.position.z = 0.44;
+            nariz.position.y = 0.01;
+            boca.position.x = -0.75;
+            boca.position.z = 0.5;
+            boca.position.y = -0.1;
+            boca.rotation.z = 2.5;
+            brazo1.position.x = -0.85;
+            brazo1.position.y = -0.66;
+            brazo1.rotation.z = 1.2;
+            brazo2.rotation.z = -2.1;
+            brazo2.position.x = 0.0008;
+            brazo2.position.y = 0.33;
+            brazo2.scale.x = 1.6
+            bola1.position.x = -0.7;
+            bola1.position.y = -0.38;
+            bola2.position.x = -0.29;
+            bola2.position.y = -0.09;
+            antena1.position.x = -0.9;
+            antena1.position.y = 0.9;
+            antena1.scale.y = 1.2;
+            antena1.scale.x = 0.05;
+            antena2.position.x = -0.9;
+            antena2.position.y = 1.5;
+            antena2.position.z = 0.07;
+            mano1.position.x = -1;
+            mano1.position.y = -0.9;
+            mano2.position.x = 0.3;
+            mano2.position.y = 0.7;
+            DI1.scale.y = 0.15;
+            DI1.scale.x = 0.35;
+            DI1.position.y = -1;
+            DI1.position.x = -1.05;
+            DI2.scale.y = 0.15;
+            DI2.scale.x = 0.35;
+            DI2.position.y = -1;
+            DI2.position.x = -0.96;
+            DI2.rotation.z = 0.2;
+            DI3.scale.y = 0.15;
+            DI3.scale.x = 0.35;
+            DI3.rotation.z = 0.6;
+            DI3.position.y = -0.94;
+            DI3.position.x = -0.9;
+            DI4.scale.y = 0.15;
+            DI4.scale.x = 0.35;
+            DI4.rotation.z = 2.4;
+            DI4.position.y = -0.83;
+            DI4.position.x = -0.9;
+            DD1.scale.y = 0.15;
+            DD1.scale.x = 0.35;
+            DD1.position.y = 0.7;
+            DD1.position.x = 0.17;
+            DD1.rotation.z = 1.2;
+            DD2.scale.y = 0.15;
+            DD2.scale.x = 0.35;
+            DD2.position.y = 0.8;
+            DD2.position.x = 0.28;
+            DD3.scale.y = 0.15;
+            DD3.scale.x = 0.35;
+            DD3.position.y = 0.78;
+            DD3.position.x = 0.37;
+            DD3.rotation.z = -0.5;
+            DD4.scale.y = 0.15;
+            DD4.scale.x = 0.35;
+            DD4.rotation.z = -1;
+            DD4.position.y = 0.68;
+            DD4.position.x = 0.4;
+            pierna1.position.y = -1.;
+            pierna1.position.x = -0.55
+            pierna1.rotation.z = -0.25;
+            pierna1.scale.y = 1;
+            pierna1.scale.x = 0.5;
+            pierna2.position.y = -1;
+            pierna2.position.x = -0.3;
+            pierna2.rotation.z = -0.25;
+            pierna2.scale.y = 1;
+            pierna2.scale.x = 0.5;
+            pie1.position.x = -0.68
+            pie1.position.y = -1.43;
+            pie2.position.x = -0.4
+            pie2.position.y = -1.43;
+        }
+
+        function crearLuzPunto(){
+            var luzPunto = new THREE.PointLight(0xffffff, 2, 100);
+            luzPunto.name = "luz";
+            luzPunto.position.set(0, 0, 50);
+            scene.add(luzPunto);
+        }
+
+        init();
+        requestAnimationFrame(animate);
+        crearLuzPunto();
+
+
+    </script>
+</body>
+</html>
