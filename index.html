@@ -7,7 +7,8 @@
     <title>Prácticas</title>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"></script>
+    <script src = "https://unpkg.com/three@0.85.0/examples/js/controls/OrbitControls.js"></script>
     <script>
         
         var camera;
@@ -44,7 +45,7 @@
         var pierna2;
         var pie1;
         var pie2;
-        
+        var controls;
 
         function init(){
         camera = new THREE.PerspectiveCamera(75,500/350,1,100);
@@ -62,7 +63,7 @@
         cuerpo = new THREE.Mesh(geometriaCuerpo,materialCuerpo);
 
         geometriaCuerpo2 = new THREE.SphereGeometry(0.275, 0, 32, 16, Math.PI);
-        materialCuerpo2 = new THREE.MeshPhongMaterial({color: 0xE2A40B});
+        materialCuerpo2 = new THREE.MeshPhongMaterial({color: 0xF68E00});
         cuerpo2 = new THREE.Mesh(geometriaCuerpo2,materialCuerpo2);
 
         geometriaOreja1 = new THREE.SphereGeometry(0.15,32,16);
@@ -204,13 +205,17 @@
         scene.add(DD2);
         scene.add(DD3);
         scene.add(DD4);
-        scene.add(pierna1);
+        scene.add(pierna1 );
         scene.add(pierna2);
         scene.add(pie1);
         scene.add(pie2);
 
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.minDistance = 3;
+        controls.maxDistance = 10;
+        
         document.body.appendChild(renderer.domElement);
         }
 
@@ -221,27 +226,29 @@
             cabeza.position.y = 0.2;
             cuerpo.position.x = -0.35;
             cuerpo.position.y = -0.42;
-            cuerpo2.position.x = -0.33;
+            cuerpo2.position.x = -0.34;
             cuerpo2.position.y = -0.43;
-            cuerpo2.position.z = 0.1;
+            cuerpo2.position.z = 0.05;
             cuerpo2.rotation.x = -3;
             cuerpo2.rotation.y = -0.7;
             cuerpo2.rotation.z = -0.5;
             oreja1.position.y = 0.4;
             oreja1.position.x = -0.38;
-            oreja1.position.z = -0.4;
+            oreja1.position.z = -0.1;
             oreja2.position.x = -1.2;
             oreja2.position.z = 0.2;
             oreja2.position.y = 0.08;
-            ceja1.position.x = -0.8;
-            ceja1.position.z = 0.9;
+            ceja1.position.x = -0.95;
+            ceja1.position.z = 0.47;
             ceja1.position.y = 0.25;
+            ceja1.rotation.y = -0.2;
             ojo1.position.x = -0.95;
             ojo1.position.z = 0.45;
             ojo1.position.y = 0.13;
-            ceja2.position.x = -0.33;
-            ceja2.position.z = 0.9;
-            ceja2.position.y = 0.3;
+            ceja2.position.x = -0.42;
+            ceja2.position.z = 0.265;
+            ceja2.position.y = 0.35;
+            ceja2.rotation.y = 1;
             ojo2.position.y = 0.25;
             ojo2.position.x = -0.4;
             ojo2.position.z = 0.3;
@@ -249,9 +256,10 @@
             nariz.position.z = 0.44;
             nariz.position.y = 0.01;
             boca.position.x = -0.75;
-            boca.position.z = 0.5;
+            boca.position.z = 0.4;
             boca.position.y = -0.1;
             boca.rotation.z = 2.5;
+            boca.rotation.x = 0.5;
             brazo1.position.x = -0.85;
             brazo1.position.y = -0.66;
             brazo1.rotation.z = 1.2;
@@ -269,7 +277,7 @@
             antena1.scale.x = 0.05;
             antena2.position.x = -0.9;
             antena2.position.y = 1.5;
-            antena2.position.z = 0.07;
+            antena2.position.z = 0.01;
             mano1.position.x = -1;
             mano1.position.y = -0.9;
             mano2.position.x = 0.3;
@@ -329,10 +337,26 @@
         }
 
         function crearLuzPunto(){
-            var luzPunto = new THREE.PointLight(0xffffff, 2, 100);
-            luzPunto.name = "luz";
-            luzPunto.position.set(0, 0, 50);
-            scene.add(luzPunto);
+            var luzPunto1  = new THREE.PointLight(0xffffff, 2, 100);
+            luzPunto1.name = "luz1";
+            luzPunto1.position.set(0, 0, -50);
+            scene.add(luzPunto1);
+
+            var luzPunto2  = new THREE.PointLight(0xffffff, 2, 100);
+            luzPunto2.name = "luz2";
+            luzPunto2.position.set(0, 0, 50);
+            scene.add(luzPunto2);
+
+            var luzPunto3  = new THREE.PointLight(0xffffff, 2, 100);
+            luzPunto3.name = "luz3";
+            luzPunto3.position.set(0, 50, 0);
+            scene.add(luzPunto3);
+
+            var luzPunto4  = new THREE.PointLight(0xffffff, 2, 100);
+            luzPunto4.name = "luz3";
+            luzPunto4.position.set(50, 0, 0);
+            scene.add(luzPunto4);
+
         }
 
         init();
